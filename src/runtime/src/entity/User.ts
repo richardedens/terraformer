@@ -30,11 +30,11 @@ export class User {
     role: string;
 
     @Column()
-    @CreateDateColumn()
+    @CreateDateColumn({ precision: null, type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     createdAt: Date;
 
     @Column()
-    @UpdateDateColumn()
+    @UpdateDateColumn({ precision: null, type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     updatedAt: Date;
 
     hashPassword() {
