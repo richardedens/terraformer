@@ -34,7 +34,7 @@ export class User {
     createdAt: Date;
 
     @Column()
-    @UpdateDateColumn({ precision: null, type: "timestamp", default: () => "0000-00-00 00:00:00" })
+    @UpdateDateColumn({ precision: null, type: "timestamp", default: () => "'0000-00-00 00:00:00'" })
     updatedAt: Date;
 
     hashPassword() {
