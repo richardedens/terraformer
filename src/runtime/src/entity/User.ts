@@ -30,7 +30,7 @@ export class User {
     role: string;
 
     @Column()
-    @CreateDateColumn({ precision: null, type: "timestamp" })
+    @CreateDateColumn({ precision: null, type: "timestamp", default: () => "" })
     createdAt: Date;
 
     @Column()
