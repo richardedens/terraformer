@@ -1,9 +1,9 @@
+// Setup server.
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import * as express from "express";
 import * as session from "express-session";
 import * as http from "http";
-import * as fs from "fs";
 import * as cookieParser from "cookie-parser";
 import * as bodyParser from "body-parser";
 import * as createError from "http-errors";
@@ -12,15 +12,63 @@ import * as logger from "morgan";
 import * as sassMiddleware from "node-sass-middleware";
 import * as helmet from "helmet";
 import * as cors from "cors";
-import * as passport from "passport";
 import routes from "./routes";
 
+// Setup passport.
+import * as passport from "passport";
+import * as passport_local from "passport-local";
+import User from "./entity/User";
+import { getRepository } from "typeorm";
+
+// Setup introduction.
 import { Intro } from "../../shared/util/intro";
+import { ɵLOCALE_DATA, LOCALE_ID } from "@angular/core";
 const intro = new Intro();
 
+// Start connection to the database and then start the server.
 createConnection().then(async connection => {
 
     const app = express();
+
+    // Setup use
+    passport.use(new passport_local.Strategy(async (username, password, done) => {
+        const userRepository = getRepository(User);
+        let user: User;
+        try {
+            user = await userRepository.findOneOrFail({ where: { username } });
+            
+            if (!user || !user.checkIfUnencryptedPasswordIsValid(password)) {
+                // tslint:disable-next-line: no-null-keyword
+                return done(new Error("password is invalid"));
+            }
+
+            // tslint:disable-next-line: no-null-keyword
+            return done(null, user);
+        } catch (error) {
+            console.log(error);
+            return done(error);
+        }
+    }));
+
+    // Setup deserializedUser
+    passport.deserializeUser(async function (id, cb) {
+        const userRepository = getRepository(User);
+        let user: User;
+        // @ts-ignore
+        try {
+            user = await userRepository.findOneOrFail({ where: { id } });
+        } catch (err) {
+            cb(err);
+        }
+        // tslint:disable-next-line: no-null-keyword
+        cb(null, user);
+    });
+
+    // Setup serializedUser
+    passport.serializeUser(function (user: User, cb) {
+        // tslint:disable-next-line: no-null-keyword
+        cb(null, user.id);
+    });
 
     // Call midlewares
     app.use(cors());

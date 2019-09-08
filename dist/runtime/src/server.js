@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+// Setup server.
 require("reflect-metadata");
 var typeorm_1 = require("typeorm");
 var express = require("express");
@@ -49,14 +50,80 @@ var logger = require("morgan");
 var sassMiddleware = require("node-sass-middleware");
 var helmet = require("helmet");
 var cors = require("cors");
-var passport = require("passport");
 var routes_1 = require("./routes");
+// Setup passport.
+var passport = require("passport");
+var passport_local = require("passport-local");
+var User_1 = require("./entity/User");
+var typeorm_2 = require("typeorm");
+// Setup introduction.
 var intro_1 = require("../../shared/util/intro");
 var intro = new intro_1.Intro();
+// Start connection to the database and then start the server.
 typeorm_1.createConnection().then(function (connection) { return __awaiter(_this, void 0, void 0, function () {
     var app, port;
+    var _this = this;
     return __generator(this, function (_a) {
         app = express();
+        // Setup use
+        passport.use(new passport_local.Strategy(function (username, password, done) { return __awaiter(_this, void 0, void 0, function () {
+            var userRepository, user, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        userRepository = typeorm_2.getRepository(User_1.default);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, userRepository.findOneOrFail({ where: { username: username } })];
+                    case 2:
+                        user = _a.sent();
+                        if (!user || !user.checkIfUnencryptedPasswordIsValid(password)) {
+                            // tslint:disable-next-line: no-null-keyword
+                            return [2 /*return*/, done(new Error("password is invalid"))];
+                        }
+                        // tslint:disable-next-line: no-null-keyword
+                        return [2 /*return*/, done(null, user)];
+                    case 3:
+                        error_1 = _a.sent();
+                        console.log(error_1);
+                        return [2 /*return*/, done(error_1)];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        }); }));
+        // Setup deserializedUser
+        passport.deserializeUser(function (id, cb) {
+            return __awaiter(this, void 0, void 0, function () {
+                var userRepository, user, err_1;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            userRepository = typeorm_2.getRepository(User_1.default);
+                            _a.label = 1;
+                        case 1:
+                            _a.trys.push([1, 3, , 4]);
+                            return [4 /*yield*/, userRepository.findOneOrFail({ where: { id: id } })];
+                        case 2:
+                            user = _a.sent();
+                            return [3 /*break*/, 4];
+                        case 3:
+                            err_1 = _a.sent();
+                            cb(err_1);
+                            return [3 /*break*/, 4];
+                        case 4:
+                            // tslint:disable-next-line: no-null-keyword
+                            cb(null, user);
+                            return [2 /*return*/];
+                    }
+                });
+            });
+        });
+        // Setup serializedUser
+        passport.serializeUser(function (user, cb) {
+            // tslint:disable-next-line: no-null-keyword
+            cb(null, user.id);
+        });
         // Call midlewares
         app.use(cors());
         app.use(helmet());

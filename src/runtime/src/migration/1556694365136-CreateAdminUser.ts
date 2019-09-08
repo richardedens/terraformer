@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, getRepository} from "typeorm";
+import { MigrationInterface, QueryRunner, getRepository } from "typeorm";
 import { User } from "../entity/User";
 
 export class CreateAdminUser1556694365136 implements MigrationInterface {
