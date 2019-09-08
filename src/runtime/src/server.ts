@@ -36,7 +36,7 @@ createConnection().then(async connection => {
         let user: User;
         try {
             user = await userRepository.findOneOrFail({ where: { username } });
-            
+
             if (!user || !user.checkIfUnencryptedPasswordIsValid(password)) {
                 // tslint:disable-next-line: no-null-keyword
                 return done(new Error("password is invalid"));

@@ -10354,7 +10354,6 @@ a.text-dark:hover, a.text-dark:focus {
 /* line 51, ../../scss/pages/login.scss */
 .login .form {
   width: 480px;
-  background-color: #fff;
   padding: 6rem;
 }
 @media only screen and (max-width: 768px) {
