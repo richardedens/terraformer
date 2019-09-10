@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as loginCheck from "connect-ensure-login";
+
 const router = express.Router();
 
 /* GET home page. */
