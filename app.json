@@ -1,0 +1,22 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "description": "The terraformer low-code pure NodeJS application platform as a service.",
+  "env": {
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "terraformer",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
