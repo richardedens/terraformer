@@ -28,6 +28,9 @@ const intro = new Intro();
 // Start connection to the database and then start the server.
 createConnection().then(async connection => {
 
+    // Synchronize
+    await connection.synchronize();
+
     const app = express();
 
     // Setup use

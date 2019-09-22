@@ -7,7 +7,7 @@ const router = express.Router();
 // @ts-ignore
 router.get('/', loginCheck.ensureLoggedIn({ redirectTo: "/signin" }), (req, res, next) => {
     res.render('vs', {
-        title: 'OpenPEN - App Generator',
+        title: 'terraformer.app - webapp architect and generator',
         cachebust: ('v=' + +new Date)
     });
 });

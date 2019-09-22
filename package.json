@@ -12,17 +12,19 @@
         "terraformer": "./bin/terraformer"
     },
     "scripts": {
-        "start": "npm-run-all run:migration run:start",
+        "start": "npm-run-all run:start",
         "test": "npm-run-all run:tsc-test run:ng-test",
-        "build": "npm-run-all run:ng-build run:tsc-build",
-        "prod": "npm-run-all run:ng-build run:tsc-build run:migration run:start",
-        "prod:server": "npm-run-all run:tsc-build run:migration run:start",
+        "build": "npm-run-all run:ng-build run:tsc-build run:dbsync run:migration",
+        "prod": "npm-run-all run:ng-build run:tsc-build run:dbsync run:migration run:start",
+        "prod:db": "npm-run-all run:dbsync run:migration",
+        "prod:server": "npm-run-all run:tsc-build run:dbsync run:migration run:start",
         "ng": "ng",
         "run:tsc-test": "mocha -r ts-node/register src/runtime/test/**/*.spec.ts",
         "run:ng-test": "cd ./src/frontoffice/app/ && ng test && cd ../../../",
         "run:ng-e2e": "cd ./src/frontoffice/app/ && ng e2e && cd ../../../",
         "run:tsc-build": "tsc",
         "run:ng-build": "cd ./src/frontoffice/app/ && ng build && cd ../../../",
+        "run:dbsync": "node ./dist/runtime/src/dbsync",
         "run:migration": "ts-node ./node_modules/typeorm/cli.js migration:run",
         "run:start": "node ./dist/runtime/src/server"
     },
@@ -107,8 +109,10 @@
         "tslib": "^1.10.0",
         "twig": "^1.13.3",
         "typeorm": "^0.2.18",
+        "typeorm-encrypted": "^0.5.1",
         "when": "^3.7.8",
-        "zone.js": "~0.9.1"
+        "zone.js": "~0.9.1",
+        "typescript": "^3.5.3"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "~0.803.3",
@@ -150,7 +154,6 @@
         "mocha": "^6.2.0",
         "protractor": "~5.4.2",
         "ts-node": "^8.3.0",
-        "tslint": "~5.19.0",
-        "typescript": "^3.5.3"
+        "tslint": "~5.19.0"
     }
 }

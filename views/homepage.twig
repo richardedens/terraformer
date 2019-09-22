@@ -17,40 +17,54 @@
         <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
         <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/manifest.json">
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-        <meta name="theme-color" content="#ffffff">
+        <meta
+        name="theme-color" content="#ffffff">
 
         <!-- Messgaes CSS -->
-        <link href="assets/css/pages/messages.css?{{ cachebust }}" rel="stylesheet">
+        <link
+        href="assets/css/pages/messages.css?{{ cachebust }}" rel="stylesheet">
 
         <!-- Base CSS -->
-        <link href="assets/css/basestyle/style.css?{{ cachebust }}" rel="stylesheet">
+        <link
+        href="assets/css/basestyle/style.css?{{ cachebust }}" rel="stylesheet">
 
         <!-- Material Icons -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link
+        href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
         <!-- Date Range Picker -->
-        <link href="assets/css/daterangepicker/daterangepicker.css?{{ cachebust }}" rel="stylesheet" type="text/css"/>
+        <link
+        href="assets/css/daterangepicker/daterangepicker.css?{{ cachebust }}" rel="stylesheet" type="text/css"/>
 
         <!-- Full Calendar Icons -->
-        <link href="assets/css/fullcalendar/fullcalendar.css?{{ cachebust }}" rel="stylesheet">
+        <link
+        href="assets/css/fullcalendar/fullcalendar.css?{{ cachebust }}" rel="stylesheet">
 
         <!-- Full Calendar Icons -->
-        <link href="css/wireframe.css?{{ cachebust }}" rel="stylesheet">
+        <link
+        href="css/wireframe.css?{{ cachebust }}" rel="stylesheet">
 
         <!-- Prism -->
-        <link href="css/prism.css?{{ cachebust }}" rel="stylesheet">
+        <link
+        href="css/prism.css?{{ cachebust }}" rel="stylesheet">
 
         <!-- Bootswatch -->
-        <link href="css/bootstrap.min.css?{{ cachebust }}" rel="stylesheet">
+        <link
+        href="css/bootstrap.min.css?{{ cachebust }}" rel="stylesheet">
+
+        <!-- Visual Studio Code Monaco -->
+        <link data-name="vs/editor/editor.main" href="js/vs/editor/editor.main.css" rel="stylesheet">
 
         <title>{{ title }}</title>
+
+
     </head>
     <body>
 
@@ -408,7 +422,7 @@
                     <div class="content-area">
 
                         <header class="header sticky-top">
-                            <nav class="navbar navbar-light px-sm-4 ">
+                            <nav class="navbar navbar-dark  px-sm-4 ">
                                 <a class="navbar-brand py-2 d-md-none  m-0 material-icons toggle-sidebar" href="#">menu</a>
                                 <ul class="navbar-nav flex-row ml-auto">
                                     <li class="nav-item" data-placement="bottom" data-toggle="tooltip" title="Switch Application">
@@ -523,6 +537,9 @@
                                             <li class="nav-item">
                                                 <a aria-controls="scriptsrc" aria-selected="false" class="nav-link px-4 py-3 rounded-0" data-toggle="tab" href="#scriptsrc" id="scriptsrc-tab" role="tab">Automation script</a>
                                             </li>
+                                            <li class="nav-item">
+                                                <a aria-controls="codeedit" aria-selected="false" class="nav-link px-4 py-3 rounded-0" data-toggle="tab" href="#codeedit" id="codeedit-tab" role="tab">Code editor</a>
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="card-body">
@@ -555,7 +572,7 @@
 
                                                         </div>
                                                         <div>
-                                                            <input id="userStory" placeholder="as an ... i want to ... so that i ..." style="font-size: 36px;border: none;outline: none;padding-right: 30px;width: 100%;padding-bottom: 30px;padding-left: 30px;" type="text">
+                                                            <input id="userStory" placeholder="as an ... i want to ... so that i ..." style="background: transparent;font-size: 36px;border: none;outline: none;padding-right: 30px;width: 100%;padding-bottom: 30px;padding-left: 30px;" type="text">
                                                             <br>
                                                             <div style="padding-left: 30px;font-size: 22px;">
                                                                 <stong>What could we read from your story?</stong><br>
@@ -656,6 +673,38 @@
                                                         </div>
                                                         <div>
                                                             <div id="codeToCompile"></div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div aria-labelledby="codeedit-tab" class="tab-pane fade" id="codeedit" role="tabpanel">
+                                                <div class="card mb-sm-12 mb-12">
+                                                    <div class="card-body p-0">
+                                                        <div class="p-3 pl-4">
+
+                                                            <div class="media align-items-center">
+                                                                <div class="media-body">
+                                                                    <small class="text-muted weight-300">Code</small>
+                                                                    <p class="m-0 weight-400">Visual Studio Code Editor!</p>
+                                                                </div>
+                                                                <span class="dropdown">
+                                                                    <a aria-expanded="false" aria-haspopup="true" class="text-muted" data-toggle="dropdown" href="#" id="dropdownMenuLink" role="button">
+                                                                        <span class="material-icons">more_vert</span>
+                                                                    </a>
+
+                                                                    <div aria-labelledby="dropdownMenuLink" class="dropdown-menu dropdown-menu-right">
+                                                                        <a class="dropdown-item" href="#">Daily</a>
+                                                                        <a class="dropdown-item" href="#">Weekly</a>
+                                                                        <a class="dropdown-item" href="#">Monthly</a>
+                                                                        <a class="dropdown-item" href="#">Yearly</a>
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+
+                                                        </div>
+                                                        <div>
+                                                            <iframe id="codeEditor" src="/vs"></iframe>
                                                         </div>
 
                                                     </div>
@@ -805,25 +854,35 @@
                     </div>
                 </div>
 
-                <script src="assets/js/chartjs/Chart.js?{{ cachebust }}"></script>
-                <script src="assets/js/chartjs/utils.js?{{ cachebust }}"></script>
-
                 <script src="assets/js/lib/moment.min.js?{{ cachebust }}"></script>
                 <script src="assets/js/lib/jquery.min.js?{{ cachebust }}"></script>
                 <script src="assets/js/lib/popper.min.js?{{ cachebust }}"></script>
                 <script src="assets/js/bootstrap/bootstrap.min.js?{{ cachebust }}"></script>
                 <script src="assets/js/chosen-js/chosen.jquery.js?{{ cachebust }}"></script>
-                <script src="assets/js/fullcalendar/fullcalendar.js?{{ cachebust }}"></script>
-
-                <script src="assets/js/daterangepicker/daterangepicker.min.js?{{ cachebust }}"></script>
                 <script src="assets/js/custom.js?{{ cachebust }}"></script>
 
-                <script src="assets/js/pages/dashboard.script.js?{{ cachebust }}"></script>
 
+                <!-- Visual Studio Code - Monaco Editor -->
+                <script>
+                    var codeEditor = document.getElementById('codeEditor');
+                    setTimeout(function () {
+                        [codeEditor].forEach(reveal);
+                    }, 3000);
+                    function reveal(iframe) {
+                        iframe.style.width = $(iframe).parent().width() - 60;
+                        iframe.style.height = '100%';
+                        iframe.style.display = 'block';
+                        iframe.style.visibility = 'visible';
+                    }
+                </script>
+
+                <!-- The rest of the dependencies -->
                 <script src="js/jsplumb.js?{{ cachebust }}"></script>
-                <script src="js/engine.js?{{ cachebust }}"></script>
                 <script src="js/prism.js?{{ cachebust }}"></script>
 
-
+                <!-- Ultronic Architect Engine -->
+                <script src="js/engine.js?{{ cachebust }}"></script>
             </body>
         </html>
+    </body>
+</html>

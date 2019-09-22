@@ -31,12 +31,10 @@ export class User {
 
     @Column()
     @CreateDateColumn()
-    //@CreateDateColumn({ precision: null, type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     createdAt: Date;
 
     @Column()
     @UpdateDateColumn()
-    //@UpdateDateColumn({ precision: null, type: "timestamp", default: () => "'0000-00-00 00:00:00'" })
     updatedAt: Date;
 
     hashPassword() {

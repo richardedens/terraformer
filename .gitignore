@@ -1,6 +1,6 @@
 node_modules
 .mendix
+dist
 temp
 spec
 e2e
-ormconfig.json
