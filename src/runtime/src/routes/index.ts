@@ -4,7 +4,7 @@ import signin from "./signin";
 import vs from "./vs";
 import user from "./user";
 import bpmn from "./bpmn";
-import app from "./app";
+import sys from "./sys";
 import dashboard from "./dashboard";
 
 // API
@@ -22,6 +22,6 @@ routes.use("/user", user);
 routes.use("/bpmn", bpmn);
 routes.use("/vs", vs);
 routes.use("/dashboard", dashboard);
-routes.use("/dock", app);
+routes.use("/sys", sys);
 
 export default routes;
