@@ -4,11 +4,13 @@ import {
     Column,
     Unique,
     CreateDateColumn,
-    UpdateDateColumn
+    UpdateDateColumn,
+    OneToMany
 } from "typeorm";
 import { Length, IsNotEmpty } from "class-validator";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
+import { Tenant } from "./Tenant";
 
 @Entity()
 @Unique(["username"])
@@ -16,6 +18,12 @@ export class User {
 
     @PrimaryGeneratedColumn()
     id: number;
+
+    @Column()
+    firstname: string;
+
+    @Column()
+    lastname: string;
 
     @Column()
     @Length(4, 20)
@@ -36,6 +44,9 @@ export class User {
     @Column()
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToMany(type => Tenant, tenant => tenant.user)
+    tenants: Tenant[];
 
     hashPassword() {
         this.password = bcrypt.hashSync(this.password, 8);
